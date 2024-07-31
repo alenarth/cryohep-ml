@@ -1,0 +1,13 @@
+ipywidgets
+jupyter
+jupyterlab
+lazypredict
+lightgbm
+matplotlib
+numpy
+pandas
+pyeasyga
+scikit-learn
+scipy
+shap
+xgboost
