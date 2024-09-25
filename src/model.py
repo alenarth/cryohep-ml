@@ -1,4 +1,4 @@
-# from lazypredict.Supervised import LazyRegressor
+from lazypredict.Supervised import LazyRegressor
 from typing import Literal
 
 import joblib
@@ -8,6 +8,7 @@ from sklearn.linear_model import ElasticNet, Lasso, LinearRegression, Ridge
 from sklearn.neighbors import KNeighborsRegressor
 from sklearn.svm import SVR
 from sklearn.ensemble import GradientBoostingRegressor
+from sklearn.ensemble import BaggingRegressor
 from xgboost import XGBRegressor
 
 models = {
@@ -20,6 +21,8 @@ models = {
     "SVR": SVR,
     "RandomForestRegressor": RandomForestRegressor,
     "ExtraTreesRegressor": ExtraTreesRegressor,
+    "BaggingRegressor": BaggingRegressor,
+    "Bagging Regressor": BaggingRegressor,  # Ajuste aqui
     "XGBRegressor": XGBRegressor,
 }
 
