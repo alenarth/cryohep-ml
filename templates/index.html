@@ -4,30 +4,76 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Resultados do Modelo</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-    <h1>Previsão do Modelo de ML</h1>
-    <input type="text" id="features" placeholder="Insira as características, separadas por vírgula">
-    <button onclick="makePrediction()">Prever</button>
-    <p id="result"></p>
+    <h1>Gráficos dos Resultados do Modelo</h1>
+    
+    <!-- Canvas para os gráficos -->
+    <h2>Histórico do Algoritmo Genético</h2>
+    <canvas id="geneticAlgorithmChart" width="400" height="200"></canvas>
+    
+    <h2>Avaliação do Modelo</h2>
+    <canvas id="evaluationChart" width="400" height="200"></canvas>
 
     <script>
-        async function makePrediction() {
-            const features = document.getElementById('features').value.split(',').map(Number);
-            const response = await fetch('/predict', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ features })
-            });
+        async function fetchChartData() {
+            const response = await fetch('/chart-data');
             const data = await response.json();
-            if (response.ok) {
-                document.getElementById('result').innerText = `Previsão: ${data.prediction}`;
-            } else {
-                document.getElementById('result').innerText = `Erro: ${data.error}`;
-            }
+            return data;
         }
+
+        async function createCharts() {
+            const chartData = await fetchChartData();
+            
+            // Gráfico do Algoritmo Genético
+            const ctxGenetic = document.getElementById('geneticAlgorithmChart').getContext('2d');
+            const geneticChart = new Chart(ctxGenetic, {
+                type: 'line',
+                data: {
+                    labels: chartData.genetic_algorithm.generations,  // Gerações
+                    datasets: [{
+                        label: 'Melhor Pontuação por Geração',
+                        data: chartData.genetic_algorithm.scores,  // Pontuações
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+
+            // Gráfico de Avaliação do Modelo
+            const ctxEval = document.getElementById('evaluationChart').getContext('2d');
+            const evalChart = new Chart(ctxEval, {
+                type: 'bar',
+                data: {
+                    labels: ['Precisão (Treino)', 'Precisão (Teste)'],  // Ajuste as métricas que você quer exibir
+                    datasets: [{
+                        label: 'Precisão',
+                        data: [chartData.evaluation.train_accuracy, chartData.evaluation.test_accuracy],
+                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        }
+
+        createCharts();  // Chama a função para desenhar os gráficos
     </script>
 </body>
 </html>
