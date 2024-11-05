@@ -27,3 +27,20 @@ Para instalar as dependências necessárias, você pode usar o `pip`. Execute o 
 
 ```bash
 pip install -r requirements.txt
+
+## Minhas Modificações
+
+### Pontos importantes
+
+- *Base de Dados:* Passei a utilizar somente o arquivo "hepg2.csv" como a fonte principal de dados, misturando os dados das células hepáticas de animais e humanos, com colunas como % DMSO, % ANTES DO CONGELAMENTO, % APÓS O DESCONGELAMENTO, etc.
+- *Modelo:* O algoritmo Random Forest substituiu o algoritmo genético.
+- *Ajustar de Filtro*: Filtrei apenas as colunas que são relevantes para o DMSO.
+- *Treinamento de um modelo de Random Forest:* Usei a classe Model existente para implementar o Random Forest. E removi o código do Algoritmo Genético
+- *Ajustes nos scripts* **feature_engineering.py:** Garanti que apenas as colunas relevantes ao DMSO sejam consideradas. **model.py:** Confirmei que o RandomForestRegressor está corretamente implementado e priorizado para treinamento. **Hepatocytes Cryopreservation Solution Optimization.ipynb:** Removi o código relacionado ao algoritmo genético e atualizei para usar o RandomForestRegressor.
+
+
+
+
+
+
+

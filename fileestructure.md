@@ -18,7 +18,10 @@
     - model_selection.py
     - model.py
     - preprocessing.py
-- templates/
-    - index.html
 - .gitignore
-- script.py
+- filestructure.md
+- Hepatocytes Cryopreservation Solution Optimization.ipynb
+- LICENSE.md
+- pyproject.toml
+- README.md
+- requirements.in
