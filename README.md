@@ -27,7 +27,7 @@ Para instalar as dependências necessárias, você pode usar o `pip`. Execute o 
 
 ```bash
 pip install -r requirements.txt
-
+```
 ## Minhas Modificações
 
 ### Pontos importantes
